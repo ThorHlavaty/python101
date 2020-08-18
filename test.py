@@ -1,3 +1,3 @@
-joke = input('Tell me a joke: ')
+name = input('What is your name? ')
 
-print(joke)
+print(f'Hello {name}!')
