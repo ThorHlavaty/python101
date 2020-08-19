@@ -39,7 +39,4 @@ def findstre(stresc, pointbuy):
     print(f"Okay great! Your strenth score is now {stresc} and you have {pointbuy} points left!")
     print(" ")
     
-
-
-
 findstre(stresc, pointbuy)
