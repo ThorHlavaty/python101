@@ -1,8 +1,16 @@
+#This project is on hold. I have to revamp the allocate area to make it a function. That sucks! That means for each stat I have to calculate what the stat is changing to,
+#and then subtract that from pointbuy, return pointbuy, and do it again. It has to work for six stats, not make pointbuy negative, and wait as I'm typing this I got an idea...
+#no no no, this is on hold.
+#But for future Thor: the idea was that I could make ifs for each stat. So if str is at 8, you can add whatev, but if it's at fourteen ugh I hate this. If it's at 14, you can allocate
+#2 points...which will add 1 point to strength. Fuck you 5e pointbuy.
+
+
 #Our pool of points
 pointbuy = 27
 #For later
 desc = {}
-
+#A list of stats for our users to type later.
+statlist = ["str", "dex", "con", "wis", "int", "cha"]
 #For our loops
 validstr = False
 validdex = False
@@ -191,6 +199,21 @@ def findcha(cha, pointbuy):
     print(f"Okay great! Your charisma score is now {cha} and you have {pointbuy} points left!")
     print(" ")
     return pointbuy
+#In case they have points left over, this will reallocate them.
+def statreallocate(allocate, exchoice):
+    while allocate > 0:
+        if exchoice == "fillme" and allocate > 0 and allocate < 6 and allocate <= pointbuy:
+            pass
+        elif exchoice == "fillme" and allocate <= pointbuy and allocate == 7 or allocate == 9 :
+            pass
+        elif allocate == 6 or allocate == 8 or allocate == 0:
+            print("I'm sorry, 0, 6, and 8 aren't applicable values.")
+            break
+        elif allocate > pointbuy:
+            print("I'm sorry, you don't have enough points for that!")
+            break
+    return allocate
+
 
 #Instructions on how to use the tool.
 print("Welcome to your interactive character builder!")
@@ -205,7 +228,12 @@ print(" ")
 
 #This runs our strenth def in such a way that if the user puts in an inapplicable value, it'll rerun it.
 while not validstr: 
-    stresc = int(input("What should we make our strength? Choose a value between 8 and 15: "))
+    while True:
+        try:
+            stresc = int(input("What should we make our strength? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")    
     if stresc <= 15 and stresc >= 8:
         validstr = True
     elif stresc < 8:
@@ -220,7 +248,12 @@ print(f"Okay great! Your stregnth score is now {stresc} and you have {pointbuy} 
 print(" ")
 
 while not validdex: 
-    dex = int(input("What should we make our dexterity? Choose a value between 8 and 15: "))
+    while True:
+        try:
+            dex = int(input("What should we make our dexterity? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")    
     if dex <= 15 and dex >= 8:
         validdex = True
     elif dex < 8:
@@ -234,7 +267,12 @@ pointbuy = finddex(dex, pointbuy)
 
 
 while not validcon: 
-    con = int(input("What should we make our constitution? Choose a value between 8 and 15: "))
+    while True:
+        try:
+            con = int(input("What should we make our constitution? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")
     if con <= 15 and con >= 8:
         validcon = True
     elif con < 8:
@@ -248,10 +286,15 @@ pointbuy = findcon(con, pointbuy)
 
 while not validwis: 
     if pointbuy == 0:
-        print("You're out of points! Setting Wisdom to 8")
+        print("You're out of points! Setting wisdom to 8")
         wis = 8
         break
-    wis = int(input("What should we make our wisdom? Choose a value between 8 and 15: "))
+    while True:
+        try:
+            wis = int(input("What should we make our wisdom? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")
     if wis <= 15 and wis >= 8:
         validwis = True
     elif wis < 8:
@@ -263,7 +306,16 @@ pointbuy = findwis(wis, pointbuy)
 
 
 while not validint: 
-    intel = int(input("What should we make our intelligence? Choose a value between 8 and 15: "))
+    if pointbuy == 0:
+        print("You're out of points! Setting intelligence to 8")
+        intel = 8
+        break
+    while True:
+        try:
+            intel = int(input("What should we make our intelligence? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")
     if intel <= 15 and intel >= 8:
         validint = True
     elif intel < 8:
@@ -275,7 +327,16 @@ pointbuy = findintel(intel, pointbuy)
 
 
 while not validcha: 
-    cha = int(input("What should we make our charisma? Choose a value between 8 and 15: "))
+    if pointbuy == 0:
+        print("You're out of points! Setting charisma to 8")
+        cha = 8
+        break
+    while True:
+        try:
+            cha = int(input("What should we make our charisma? Choose a value between 8 and 15: "))
+            break
+        except ValueError:
+            print("No, I need a numeral!")
     if cha <= 15 and cha >= 8:
         validcha = True
     elif cha < 8:
@@ -284,3 +345,32 @@ while not validcha:
         print("That value is too high! New value: ")
 
 pointbuy = findcha(cha, pointbuy)
+while pointbuy > 0:
+    print(f"You have {pointbuy} points left!")
+    print("Where would you like to put them?")
+    while True:
+        try:
+            exchoice = input("You can say str, dex, con, wis, int, or cha: ").lower()
+            if exchoice not in statlist:
+                raise TypeError('needs to be a stat')
+            break
+        except TypeError:
+            print(" ")
+            print("No, I need str, dex, con, wis, int, or cha!")
+    while True:
+        try:
+            allocate = int(input("And how many points are we putting there?"))
+            if allocate > pointbuy:
+                raise TypeError('not enough points.')
+            elif allocate == 0:
+                raise TypeError('0 point assignment')
+            break
+        except ValueError:
+            print(" ")
+            print(f"No, I need a numeral between 1 and {pointbuy}!")
+            print(" ")
+        except TypeError:
+            print(" ")
+            print("I'm sorry, either you don't have enough points, or you tried to allocate 0 points.")
+            print(" ")
+
