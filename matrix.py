@@ -10,6 +10,7 @@ def matrixmakerrow1(matrix1, matrix2):
         for matrice2 in row1m2:
             for matrice3 in row2m1:
                 for matrice4 in row2m2: 
+                    pass
 while valid == "y":
     matrix1 = []
     matrix2 = []    

@@ -7,6 +7,7 @@ while valid == "y":
             if user_input < 0:
                 print("Let's be positive!")
                 user_input * -1
+                print("")
             break
         except ValueError:
             print("No, I need a numeral!")
