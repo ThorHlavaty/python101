@@ -1,19 +1,3 @@
-# inp_to_remove = ''
-    
-#     remove_quest = 'y'
-#     while remove_quest == "y":
-#         for item in grocery_list:
-#             if inp_to_remove == item:
-#                 grocery_list.pop(item)
-#                 print(f"You removed {inp_to_remove}!")
-#                 print_stuff(grocery_list)
-
-#             else:
-#                 print("Sorry, that's not an item in your list.")
-#         remove_quest = input("Would you like to remove anything else? [y/n]")
-#     return grocery_list
-
-
 user_input = ""
 grocery_list = []
 commands = ["add", "remove", "print", "exit"]
@@ -74,12 +58,7 @@ while valid == "y":
     elif user_input == "print":
         print_stuff(grocery_list)
     else:
-        print("Goodbye!\n")
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print("Goodbye!\n\n\n\n\n\n")
         print('❤️❤️❤️ i love u ❤️❤️❤️')
         valid = "n"
 
