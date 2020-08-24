@@ -4,6 +4,7 @@ while status == "y":
     script = input("Shall we decode? ")
     trans = ""
     for letter in script:
-        if letter in alpha:
-            letter.replace()
+        for letters in alpha:
+            if letter in alpha:
+                letter.replace()
         

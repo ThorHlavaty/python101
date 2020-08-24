@@ -7,3 +7,4 @@ def sleep_in(day):
     else:
         print(f"Jesus fuck {user} you have eight minutes to catch the train! WAKE UP!")
 sleep_in(day)
+

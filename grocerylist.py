@@ -8,7 +8,7 @@ while valid == "y":
     grocery =''
     grocery_list = [ Milk ]
 
-    grocery_list.append((grocery = input("What would you like to add? "))
+    grocery_list.append(input("What would you like to add? "))
     print("Cool, your curent list is: ")
     print(grocery_list)
 
